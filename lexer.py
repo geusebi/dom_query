@@ -1,5 +1,5 @@
 """
-Lexical scanner lousy based on the one described in
+Lexical scanner loosely based on the one described in
 `https://www.w3.org/TR/selectors-3/#lex`.
 
 There are major differences as the regexes have been simplified and
