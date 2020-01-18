@@ -1,6 +1,6 @@
 from .lexer import lexer
 from .parser import parse
-from .symbols import SYM, OP, symtostr, codetostr
+from .symbols import SYM, OP
 
 sym_code_map = {
     SYM.TYPE:           OP.TAGNAME,
