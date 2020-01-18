@@ -9,7 +9,5 @@ __all__ = ["lexer", "parse", "compile", "execute",
 
 
 def query(node, query):
-    tokens = lexer(query)
-    ast = parse(tokens)
-    code = compile(ast)
+    code = compile(query)
     return execute(node, code, minidom_api)

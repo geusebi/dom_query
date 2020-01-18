@@ -1,3 +1,5 @@
+from .lexer import lexer
+from .parser import parse
 from .symbols import SYM, OP, symtostr, codetostr
 
 sym_code_map = {
@@ -17,8 +19,20 @@ sym_code_map = {
     SYM.TILDE:          OP.SIBLING_SUBSEQUENT,
 }
 
+_cache = {}
 
-def compile(ast):
+
+def compile(source):
+    if source not in _cache:
+        tokens = lexer(source)
+        ast = parse(tokens)
+        code = _compile_gen(ast)
+        _cache[source] = tuple(code)
+
+    return _cache[source]
+
+
+def _compile_gen(ast):
     for selector in ast:
         yield (OP.RESET, )
 
