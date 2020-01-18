@@ -132,5 +132,6 @@ def combinator_sibling(nodes):
     # happen only in descendants combinator
     for node in nodes:
         for elem in node.parent.childNodes:
+            # todo: this should return subsequent siblings only
             if isinstance(elem, Element) and not node.isSameNode(elem):
                 yield elem
