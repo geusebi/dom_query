@@ -7,5 +7,5 @@ test-all:
   stage: test
   script:
     - pip3 install html5lib
-    - python3 -v -m unittest tests
+    - python3 -m unittest -v tests
 

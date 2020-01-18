@@ -3,7 +3,7 @@ import html5lib
 from xml.dom.minidom import (
     Childless as _Childless,
 )
-# import warnings
+import warnings
 
 _PARSE_FRAGMENT_KWARGS = {
     "treebuilder": "dom",
@@ -24,13 +24,13 @@ def parse_dom(str_or_fh, *args, **kwargs):
     # Ignore a html5lib specific warning
     # todo: regularly check whether it is still the case
     #  to ignore it.
-    # warnings.filterwarnings(
-    #     "ignore",
-    #     "Using or importing the ABCs from 'collections'",
-    #     DeprecationWarning,
-    #     "html5lib.treebuilders.dom",
-    #     4
-    # )
+    warnings.filterwarnings(
+        "ignore",
+        "Using or importing the ABCs from 'collections'",
+        DeprecationWarning,
+        "html5lib.treebuilders.dom",
+        4
+    )
 
     tree = html5lib.parse(str_or_fh, *args, **kwargs)
     return tree
