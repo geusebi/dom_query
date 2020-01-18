@@ -3,20 +3,21 @@ from types import SimpleNamespace as NameSpace
 __all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH", "symtostr",
            "OP", "OP_COMBINATORS", "OP_FILTERS", "codetostr", ]
 
-sym_names = (
-    "ATTRIBOPEN", "ATTRIBCLOSE",
-    "EQUAL", "INCLUDES", "DASHMATCH", "PREFIXMATCH",
-    "SUFFIXMATCH", "SUBSTRINGMATCH",
-    "S", "PLUS", "GREATER", "TILDE", "COMMA",
-    "UNIVERSAL", "IDENT", "HASH", "CLASS", "STRING", "LETTER",
-    "START", "END", "HASATTRIB", "TYPE", "DESCENDANT",
-)
+SYM = NameSpace()
 
-sym_name_map = dict(enumerate(sym_names))
-
-SYM = NameSpace(**{name: value
-                   for value, name
-                   in sym_name_map.items()})
+(SYM.ATTRIBOPEN,     SYM.COMMA,
+ SYM.ATTRIBCLOSE,    SYM.UNIVERSAL,
+ SYM.EQUAL,          SYM.IDENT,
+ SYM.INCLUDES,       SYM.HASH,
+ SYM.DASHMATCH,      SYM.CLASS,
+ SYM.PREFIXMATCH,    SYM.STRING,
+ SYM.SUFFIXMATCH,    SYM.LETTER,
+ SYM.SUBSTRINGMATCH, SYM.START,
+ SYM.S,              SYM.END,
+ SYM.PLUS,           SYM.HASATTRIB,
+ SYM.GREATER,        SYM.TYPE,
+ SYM.TILDE,          SYM.DESCENDANT,
+ ) = range(24)
 
 SYM_COMBINATORS = (
     SYM.PLUS,
@@ -34,23 +35,26 @@ SYM_ATTRIBMATCH = (
     SYM.SUBSTRINGMATCH,
 )
 
+sym_name_map = {sym: name
+                for name, sym
+                in SYM.__dict__.items()}
+
 
 def symtostr(sym):
     return sym_name_map[sym]
 
 
-op_names = (
-    "TAGNAME", "ID", "ATTR_PRESENCE", "ATTR_EXACTLY", "ATTR_WORD",
-    "ATTR_BEGIN", "ATTR_PREFIX", "ATTR_SUFFIX", "ATTR_SUBSTRING",
-    "CLASSES", "DESCENDANT", "CHILDREN", "SIBLING_NEXT",
-    "SIBLING_SUBSEQUENT", "STORE", "RESET",
-)
+OP = NameSpace()
 
-op_name_map = dict(enumerate(op_names))
-
-OP = NameSpace(**{name: value
-                  for value, name
-                  in op_name_map.items()})
+(OP.TAGNAME,            OP.ATTR_PRESENCE,
+ OP.ID,                 OP.ATTR_EXACTLY,
+ OP.DESCENDANT,         OP.ATTR_WORD,
+ OP.CHILDREN,           OP.ATTR_BEGIN,
+ OP.SIBLING_NEXT,       OP.ATTR_PREFIX,
+ OP.SIBLING_SUBSEQUENT, OP.ATTR_SUFFIX,
+ OP.STORE,              OP.ATTR_SUBSTRING,
+ OP.RESET,              OP.CLASSES,
+ ) = range(16)
 
 OP_COMBINATORS = {
     OP.DESCENDANT,
@@ -71,6 +75,10 @@ OP_FILTERS = {
     OP.ATTR_SUBSTRING,
     OP.CLASSES,
 }
+
+op_name_map = {sym: name
+               for name, sym
+               in OP.__dict__.items()}
 
 
 def codetostr(code):
