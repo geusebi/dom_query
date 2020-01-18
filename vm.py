@@ -4,7 +4,7 @@ __all__ = ["execute", ]
 
 
 def execute(root, code, api):
-    output = set()
+    output = []
 
     elements = None
     for opcode, *args in code:
@@ -16,7 +16,8 @@ def execute(root, code, api):
 
         elif opcode == OP.STORE:
             for element in elements:
-                output.add(element)
+                if element not in output:
+                    output.append(element)
 
         elif opcode == OP.RESET:
             elements = [root]
@@ -24,4 +25,4 @@ def execute(root, code, api):
         else:
             raise NotImplemented
 
-    return tuple(output)
+    return output
