@@ -4,13 +4,12 @@ __all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH", "symtostr"
            "OP", "OP_COMBINATORS", "OP_FILTER", "codetostr", ]
 
 sym_names = (
+    "ATTRIBOPEN", "ATTRIBCLOSE",
     "EQUAL", "INCLUDES", "DASHMATCH", "PREFIXMATCH",
     "SUFFIXMATCH", "SUBSTRINGMATCH",
-    "UNIVERSAL", "IDENT", "HASH", "CLASS", "STRING",
-    "PLUS", "GREATER", "COMMA", "TILDE", "S", "LETTER",
-    "HASATTRIB", "ATTRIBOPEN", "ATTRIBCLOSE", "START",
-    "END", "TYPE", "LOAD_ELEMS", "YIELD", "CLASSES",
-    "DESCENDANT",
+    "S", "PLUS", "GREATER", "TILDE", "COMMA",
+    "UNIVERSAL", "IDENT", "HASH", "CLASS", "STRING", "LETTER",
+    "START", "END", "HASATTRIB", "TYPE", "DESCENDANT",
 )
 
 sym_name_map = dict(enumerate(sym_names))
