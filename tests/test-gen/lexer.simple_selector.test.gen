@@ -1,0 +1,30 @@
+p
+(START) (IDENT 'p') (END) (SENTINEL)
+p#id
+(START) (IDENT 'p') (HASH 'id') (END) (SENTINEL)
+#id
+(START) (HASH 'id') (END) (SENTINEL)
+[attr]
+(START) (ATTRIBOPEN) (IDENT 'attr') (ATTRIBCLOSE) (END) (SENTINEL)
+[attr=value]
+(START) (ATTRIBOPEN) (IDENT 'attr') (EQUAL) (IDENT 'value') (ATTRIBCLOSE) (END) (SENTINEL)
+[attr="value"]
+(START) (ATTRIBOPEN) (IDENT 'attr') (EQUAL) (STRING 'value') (ATTRIBCLOSE) (END) (SENTINEL)
+[attr='value']
+(START) (ATTRIBOPEN) (IDENT 'attr') (EQUAL) (STRING 'value') (ATTRIBCLOSE) (END) (SENTINEL)
+[attr='escaped single quotes - \' " -']
+(START) (ATTRIBOPEN) (IDENT 'attr') (EQUAL) (STRING 'escaped single quotes - \' " -') (ATTRIBCLOSE) (END) (SENTINEL)
+[attr="escaped double quotes - ' \" -"]
+(START) (ATTRIBOPEN) (IDENT 'attr') (EQUAL) (STRING 'escaped double quotes - \' " -') (ATTRIBCLOSE) (END) (SENTINEL)
+[attr|=""]
+(START) (ATTRIBOPEN) (IDENT 'attr') (DASHMATCH) (STRING '') (ATTRIBCLOSE) (END) (SENTINEL)
+p.cls1
+(START) (IDENT 'p') (CLASS 'cls1') (END) (SENTINEL)
+p.cls1.cls2
+(START) (IDENT 'p') (CLASS 'cls1') (CLASS 'cls2') (END) (SENTINEL)
+.cls1.cls2
+(START) (CLASS 'cls1') (CLASS 'cls2') (END) (SENTINEL)
+.cls1#id.cls2
+(START) (CLASS 'cls1') (HASH 'id') (CLASS 'cls2') (END) (SENTINEL)
+p#id[attr~=value].cls1.cls2
+(START) (IDENT 'p') (HASH 'id') (ATTRIBOPEN) (IDENT 'attr') (INCLUDES) (IDENT 'value') (ATTRIBCLOSE) (CLASS 'cls1') (CLASS 'cls2') (END) (SENTINEL)

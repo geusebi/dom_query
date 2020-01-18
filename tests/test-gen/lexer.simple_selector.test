@@ -1,0 +1,15 @@
+p
+p#id
+#id
+[attr]
+[attr=value]
+[attr="value"]
+[attr='value']
+[attr='escaped single quotes - \' " -']
+[attr="escaped double quotes - ' \" -"]
+[attr|=""]
+p.cls1
+p.cls1.cls2
+.cls1.cls2
+.cls1#id.cls2
+p#id[attr~=value].cls1.cls2
