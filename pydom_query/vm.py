@@ -1,4 +1,4 @@
-from .symbols import OP, OP_FILTERS, OP_COMBINATORS, codetostr
+from .symbols import OP, OP_FILTERS, OP_COMBINATORS
 
 __all__ = ["execute", ]
 

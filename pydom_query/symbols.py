@@ -1,7 +1,7 @@
 from types import SimpleNamespace as NameSpace
 
-__all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH", "symtostr"
-           "OP", "OP_COMBINATORS", "OP_FILTER", "codetostr", ]
+__all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH", "symtostr",
+           "OP", "OP_COMBINATORS", "OP_FILTERS", "codetostr", ]
 
 sym_names = (
     "ATTRIBOPEN", "ATTRIBCLOSE",
