@@ -1,9 +1,26 @@
-from types import SimpleNamespace as NameSpace
+__all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH",
+           "OP", "OP_COMBINATORS", "OP_FILTERS", ]
 
-__all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH", "symtostr",
-           "OP", "OP_COMBINATORS", "OP_FILTERS", "codetostr", ]
 
-SYM = NameSpace()
+class NamedInt(int):
+    def __new__(cls, name, value):
+        o = super().__new__(cls, value)
+        o.name = name
+        return o
+
+    def __repr__(self):
+        return self.name
+
+
+class MirrorNameSpace(object):
+    def __setattr__(self, name, value):
+        sym = NamedInt(name, value)
+        self.__dict__[name] = sym
+        self.__dict__[value] = sym
+
+
+SYM = MirrorNameSpace()
+
 
 (SYM.ATTRIBOPEN,     SYM.COMMA,
  SYM.ATTRIBCLOSE,    SYM.UNIVERSAL,
@@ -35,16 +52,8 @@ SYM_ATTRIBMATCH = (
     SYM.SUBSTRINGMATCH,
 )
 
-sym_name_map = {sym: name
-                for name, sym
-                in SYM.__dict__.items()}
 
-
-def symtostr(sym):
-    return sym_name_map[sym]
-
-
-OP = NameSpace()
+OP = MirrorNameSpace()
 
 (OP.TAGNAME,            OP.ATTR_PRESENCE,
  OP.ID,                 OP.ATTR_EXACTLY,
@@ -75,11 +84,3 @@ OP_FILTERS = {
     OP.ATTR_SUBSTRING,
     OP.CLASSES,
 }
-
-op_name_map = {sym: name
-               for name, sym
-               in OP.__dict__.items()}
-
-
-def codetostr(code):
-    return op_name_map[code]
