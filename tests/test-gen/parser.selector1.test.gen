@@ -1,0 +1,14 @@
+*.cls1.cls2
+(('S', (('UNIVERSAL',), ('CLASS', 'cls1'), ('CLASS', 'cls2'))),)
+*.cls1.cls2[attr]
+(('S', (('UNIVERSAL',), ('CLASS', 'cls1'), ('CLASS', 'cls2'), ('HASATTRIB', 'attr'))),)
+*.cls1.cls2[attr=value]
+(('S', (('UNIVERSAL',), ('CLASS', 'cls1'), ('CLASS', 'cls2'), ('EQUAL', 'attr', 'value'))),)
+*.cls1.cls2[attr=value.cls3
+SyntaxError('Expected token type (2=ATTRIBCLOSE)')
+a, b > c, d + e ~ f, g h f
+(('S', (('TYPE', 'a'),)), ('S', (('TYPE', 'b'),)), ('GREATER', (('TYPE', 'c'),)), ('S', (('TYPE', 'd'),)), ('PLUS', (('TYPE', 'e'),)), ('TILDE', (('TYPE', 'f'),)), ('S', (('TYPE', 'g'),)), ('S', (('TYPE', 'h'),)), ('S', (('TYPE', 'f'),)))
+a,
+SyntaxError('Expected a simple selector')
+a[attr=, p
+SyntaxError('String expected')

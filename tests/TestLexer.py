@@ -1,29 +1,16 @@
-import unittest
-from os import path
-from itertools import count
-from pydom_query import lexer
-from .utils import stringify_tokens
+from .TestLinePairs import TestLinePairs
+from .utils import string_to_tokens_repr
 
 __all__ = ("TestLexer", )
 
 
-class TestLexer(unittest.TestCase):
+class TestLexer(TestLinePairs):
+    def __init__(self, *args, **kwargs):
+        super(TestLinePairs, self).__init__(*args, **kwargs)
+        self.output_to_repr = string_to_tokens_repr
+
     def testSingleSelectors(self):
-        self.check_test_gen("lexer.simple_selector.test.gen")
+        self.check_file("lexer.simple_selector.test.gen")
 
     def testAllTokens(self):
-        self.check_test_gen("lexer.all_tokens.test.gen")
-
-    def check_test_gen(self, name):
-        root = path.join(path.dirname(__file__), "test-gen")
-        filepath = path.join(root, name)
-
-        fh = open(filepath)
-        lines = iter(fh.read().splitlines())
-
-        for i, string, expect in zip(count(), lines, lines):
-            with self.subTest(text=string):
-                output = stringify_tokens(lexer(string))
-                self.assertEqual(output, expect)
-
-        fh.close()
+        self.check_file("lexer.all_tokens.test.gen")

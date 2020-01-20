@@ -111,8 +111,7 @@ def lexer(source):
             yield (SYM.LETTER, token)
             continue
 
-        # Should never happen
-        raise ValueError(f"Unrecognized token {token!r}")
+        raise ValueError(f"Unrecognized token {token!r}")  # Should never happen
 
     yield (SYM.END, None)
     yield (None, None)

@@ -3,7 +3,9 @@ from sys import exit
 
 try:
     from pydom_query import lexer
-    from tests.utils import string_to_tokens_repr
+    from pydom_query import parse
+    from tests.utils import string_to_ast_repr
+
 except ImportError:
     message = ("Couldn't import from pydom_query or test.utils\n"
                "This script should be run from test-gen directory with "
@@ -25,7 +27,7 @@ if __name__ == "__main__":
             if len(line) == 0:
                 continue
 
-            output = string_to_tokens_repr(line)
+            output = string_to_ast_repr(line)
 
             print(line)
             print(output)

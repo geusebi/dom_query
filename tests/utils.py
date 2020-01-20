@@ -1,9 +1,8 @@
 from pydom_query.symbols import symtostr
-import html5lib
-from xml.dom.minidom import (
-    Childless as _Childless,
-)
+from pydom_query import lexer, parse
 import warnings
+import html5lib
+from xml.dom.minidom import Childless as _Childless
 
 _PARSE_FRAGMENT_KWARGS = {
     "treebuilder": "dom",
@@ -51,13 +50,35 @@ def iter_nodes(root):
             yield from iter_nodes(node)
 
 
-def stringify_tokens(tokens):
-    parts = []
-    for sym, value in tokens:
-        if sym is None and value is None:
-            parts.append("(SENTINEL)")
-        elif value is not None:
-            parts.append(f"({symtostr(sym)} {value!r})")
-        else:
-            parts.append(f"({symtostr(sym)})")
-    return " ".join(parts)
+def string_to_tokens_repr(s):
+    try:
+        tokens = lexer(s)
+        parts = []
+        for sym, value in tokens:
+            if sym is None and value is None:
+                parts.append("(SENTINEL)")
+            elif value is not None:
+                parts.append(f"({symtostr(sym)} {value!r})")
+            else:
+                parts.append(f"({symtostr(sym)})")
+        return " ".join(parts)
+    except Exception as e:
+        return repr(e)
+
+
+def string_to_ast_repr(s):
+    try:
+        ast = parse(lexer(s))
+        h_ast = []
+        for selector in ast:
+            for combinator, simple_selector in selector:
+                criteria = []
+                for criterion, *args in simple_selector:
+                    if args is None:
+                        criteria.append(symtostr(criterion))
+                    else:
+                        criteria.append((symtostr(criterion), *args))
+                h_ast.append((symtostr(combinator), tuple(criteria)))
+        return repr(tuple(h_ast))
+    except Exception as e:
+        return repr(e)
