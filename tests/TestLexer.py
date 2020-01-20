@@ -1,16 +1,18 @@
+from pydom_query import lexer
 from .TestLinePairs import TestLinePairs
-from .utils import string_to_tokens_repr
 
 __all__ = ("TestLexer", )
 
 
-class TestLexer(TestLinePairs):
-    def __init__(self, *args, **kwargs):
-        super(TestLinePairs, self).__init__(*args, **kwargs)
-        self.output_to_repr = string_to_tokens_repr
+def to_tokens(s):
+    return tuple(lexer(s))
 
+
+class TestLexer(TestLinePairs):
     def testSingleSelectors(self):
-        self.check_file("lexer.simple_selector.test.gen")
+        name = "lexer.simple_selector.test.gen"
+        self.check_file(name, to_tokens)
 
     def testAllTokens(self):
-        self.check_file("lexer.all_tokens.test.gen")
+        name = "lexer.all_tokens.test.gen"
+        self.check_file(name, to_tokens)

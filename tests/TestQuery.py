@@ -1,10 +1,8 @@
 import unittest
 from os import path
-from .utils import parse_dom
-
 from xml.dom.minidom import Document
-
 from pydom_query import query
+from .utils import parse_dom
 
 __all__ = ("TestQuery", )
 

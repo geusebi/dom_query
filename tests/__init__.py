@@ -1,5 +1,4 @@
-__all__ = ["TestParser", ]
-# __all__ = ["TestLexer", "TestParser", "TestQuery", ]
+__all__ = ["TestLexer", "TestParser", "TestQuery", ]
 
 from .TestLexer import TestLexer
 from .TestParser import TestParser
