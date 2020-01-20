@@ -1,6 +1,4 @@
-from .symbols import (
-    SYM, SYM_COMBINATORS, SYM_ATTRIBMATCH, symtostr
-)
+from .symbols import SYM, SYM_COMBINATORS, SYM_ATTRIBMATCH
 
 __all__ = ["parse", ]
 
@@ -24,7 +22,7 @@ def parse(tokens):
             advance()
             return True
         raise SyntaxError(
-            f"Expected token type ({kind}={symtostr(kind)})"
+            f"Expected token type ({kind}={kind:d})"
         )
 
     # Generation rules
@@ -35,7 +33,7 @@ def parse(tokens):
         while accept(SYM.COMMA):
             group.append(selector())
 
-        return group
+        return tuple(group)
 
     def selector():
         sequence = list()
@@ -45,7 +43,7 @@ def parse(tokens):
             advance()
             sequence.append((combinator, simple_selector()))
 
-        return sequence
+        return tuple(sequence)
 
     def simple_selector():
         if sym not in (SYM.UNIVERSAL, SYM.IDENT,
@@ -67,7 +65,7 @@ def parse(tokens):
             elif sym == SYM.ATTRIBOPEN:
                 criteria.append(attrib())
 
-        return criteria
+        return tuple(criteria)
 
     def attrib():
         op = string = None
