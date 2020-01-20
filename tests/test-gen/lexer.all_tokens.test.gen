@@ -1,38 +1,38 @@
 p
-(START) (IDENT 'p') (END) (SENTINEL)
+((START, None), (IDENT, 'p'), (END, None), (None, None))
 #id
-(START) (HASH 'id') (END) (SENTINEL)
+((START, None), (HASH, 'id'), (END, None), (None, None))
 .cls
-(START) (CLASS 'cls') (END) (SENTINEL)
+((START, None), (CLASS, 'cls'), (END, None), (None, None))
 [
-(START) (ATTRIBOPEN) (END) (SENTINEL)
+((START, None), (ATTRIBOPEN, None), (END, None), (None, None))
 ]
-(START) (ATTRIBCLOSE) (END) (SENTINEL)
+((START, None), (ATTRIBCLOSE, None), (END, None), (None, None))
 ~=
-(START) (INCLUDES) (END) (SENTINEL)
+((START, None), (INCLUDES, None), (END, None), (None, None))
 |=
-(START) (DASHMATCH) (END) (SENTINEL)
+((START, None), (DASHMATCH, None), (END, None), (None, None))
 ^=
-(START) (PREFIXMATCH) (END) (SENTINEL)
+((START, None), (PREFIXMATCH, None), (END, None), (None, None))
 $=
-(START) (SUFFIXMATCH) (END) (SENTINEL)
+((START, None), (SUFFIXMATCH, None), (END, None), (None, None))
 *=
-(START) (SUBSTRINGMATCH) (END) (SENTINEL)
+((START, None), (SUBSTRINGMATCH, None), (END, None), (None, None))
 "s"
-(START) (STRING 's') (END) (SENTINEL)
+((START, None), (STRING, 's'), (END, None), (None, None))
 's'
-(START) (STRING 's') (END) (SENTINEL)
+((START, None), (STRING, 's'), (END, None), (None, None))
 "\""
-(START) (STRING '"') (END) (SENTINEL)
+((START, None), (STRING, '"'), (END, None), (None, None))
 '\''
-(START) (STRING "'") (END) (SENTINEL)
+((START, None), (STRING, "'"), (END, None), (None, None))
 >
-(START) (GREATER) (END) (SENTINEL)
+((START, None), (GREATER, None), (END, None), (None, None))
 +
-(START) (PLUS) (END) (SENTINEL)
+((START, None), (PLUS, None), (END, None), (None, None))
 ~
-(START) (TILDE) (END) (SENTINEL)
+((START, None), (TILDE, None), (END, None), (None, None))
 ,
-(START) (COMMA) (END) (SENTINEL)
+((START, None), (COMMA, None), (END, None), (None, None))
 /
-(START) (LETTER '/') (END) (SENTINEL)
+((START, None), (LETTER, '/'), (END, None), (None, None))
