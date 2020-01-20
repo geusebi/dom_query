@@ -1,5 +1,4 @@
-__all__ = ["SYM", "SYM_COMBINATORS", "SYM_ATTRIBMATCH",
-           "OP", "OP_COMBINATORS", "OP_FILTERS", ]
+__all__ = ["SYM", "OP", ]
 
 
 class NamedInt(int):
@@ -12,15 +11,15 @@ class NamedInt(int):
         return self.name
 
 
-class MirrorNameSpace(object):
+class NameSpace(object):
     def __setattr__(self, name, value):
-        sym = NamedInt(name, value)
-        self.__dict__[name] = sym
-        self.__dict__[value] = sym
+        if name.isupper():
+            self.__dict__[name] = NamedInt(name, value)
+        else:
+            self.__dict__[name] = value
 
 
-SYM = MirrorNameSpace()
-
+SYM = NameSpace()
 
 (SYM.ATTRIBOPEN,     SYM.COMMA,
  SYM.ATTRIBCLOSE,    SYM.UNIVERSAL,
@@ -33,17 +32,17 @@ SYM = MirrorNameSpace()
  SYM.S,              SYM.END,
  SYM.PLUS,           SYM.HASATTRIB,
  SYM.GREATER,        SYM.TYPE,
- SYM.TILDE,          SYM.DESCENDANT,
- ) = range(24)
+ SYM.TILDE,
+ ) = range(23)
 
-SYM_COMBINATORS = (
+SYM.combinators = (
     SYM.PLUS,
     SYM.GREATER,
     SYM.TILDE,
     SYM.S,
 )
 
-SYM_ATTRIBMATCH = (
+SYM.attribmatch = (
     SYM.EQUAL,
     SYM.INCLUDES,
     SYM.DASHMATCH,
@@ -53,7 +52,7 @@ SYM_ATTRIBMATCH = (
 )
 
 
-OP = MirrorNameSpace()
+OP = NameSpace()
 
 (OP.TAGNAME,            OP.ATTR_PRESENCE,
  OP.ID,                 OP.ATTR_EXACTLY,
@@ -65,14 +64,14 @@ OP = MirrorNameSpace()
  OP.RESET,              OP.CLASSES,
  ) = range(16)
 
-OP_COMBINATORS = {
+OP.combinators = {
     OP.DESCENDANT,
     OP.CHILDREN,
     OP.SIBLING_NEXT,
     OP.SIBLING_SUBSEQUENT,
 }
 
-OP_FILTERS = {
+OP.filters = {
     OP.TAGNAME,
     OP.ID,
     OP.ATTR_PRESENCE,

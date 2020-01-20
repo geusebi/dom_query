@@ -1,4 +1,4 @@
-from .symbols import SYM, SYM_COMBINATORS, SYM_ATTRIBMATCH
+from .symbols import SYM
 
 __all__ = ["parse", ]
 
@@ -38,7 +38,7 @@ def parse(tokens):
     def selector():
         sequence = list()
         sequence.append((SYM.S, simple_selector()))
-        while sym in SYM_COMBINATORS:
+        while sym in SYM.combinators:
             combinator = sym
             advance()
             sequence.append((combinator, simple_selector()))
@@ -77,7 +77,7 @@ def parse(tokens):
         expect(SYM.IDENT)
         accept(SYM.S)
 
-        if sym in SYM_ATTRIBMATCH:
+        if sym in SYM.attribmatch:
             op = sym
             advance()
             accept(SYM.S)

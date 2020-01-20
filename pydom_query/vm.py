@@ -1,4 +1,4 @@
-from .symbols import OP, OP_FILTERS, OP_COMBINATORS
+from .symbols import OP
 
 __all__ = ["execute", ]
 
@@ -8,10 +8,10 @@ def execute(root, code, api):
 
     elements = None
     for opcode, *args in code:
-        if opcode in OP_FILTERS:
+        if opcode in OP.filters:
             elements = filter(api[opcode](*args[0]), elements)
 
-        elif opcode in OP_COMBINATORS:
+        elif opcode in OP.combinators:
             elements = api[opcode](elements)
 
         elif opcode == OP.STORE:
