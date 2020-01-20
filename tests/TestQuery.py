@@ -1,6 +1,6 @@
 import unittest
 from os import path
-from .utils import parse_dom, string_to_tokens_repr, string_to_ast_repr
+from .utils import parse_dom
 
 from xml.dom.minidom import Document
 
