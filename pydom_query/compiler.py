@@ -50,6 +50,6 @@ def _compile_gen(ast):
                     yield (sym_code_map[sym], args)
 
             if classes:
-                yield (OP.CLASSES, classes)
+                yield (OP.CLASSES, (classes, ))
 
         yield (OP.STORE, )
