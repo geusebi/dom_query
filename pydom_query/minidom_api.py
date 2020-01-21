@@ -1,4 +1,4 @@
-from xml.dom.minidom import Childless, Element
+from xml.dom.minidom import Element
 from .symbols import OP
 
 api = {}
@@ -99,8 +99,6 @@ def combinator_descendant(nodes):
 
 def recurse_descendant(nodes):
     for node in nodes:
-        if isinstance(node, Childless):
-            continue
         if isinstance(node, Element):
             yield node
         yield from recurse_descendant(node.childNodes)
@@ -109,8 +107,6 @@ def recurse_descendant(nodes):
 @implement(OP.CHILDREN)
 def combinator_children(nodes):
     for node in nodes:
-        if isinstance(node, Childless):
-            continue
         for elem in node.childNodes:
             if isinstance(elem, Element):
                 yield elem
@@ -128,10 +124,14 @@ def combinator_adjacent(nodes):
 
 @implement(OP.SIBLING_SUBSEQUENT)
 def combinator_sibling(nodes):
-    # Document type (no parent) is not handled since it should
-    # happen only in descendants combinator
+    # Document type (no parent) is not handled since this
+    # combinator is meaningless on the document root
     for node in nodes:
-        for elem in node.parent.childNodes:
-            # todo: this should return subsequent siblings only
-            if isinstance(elem, Element) and not node.isSameNode(elem):
+        after_elem = False
+        for elem in node.parentNode.childNodes:
+            if not isinstance(elem, Element):
+                continue
+            if after_elem:
                 yield elem
+            if elem.isSameNode(node):
+                after_elem = True
