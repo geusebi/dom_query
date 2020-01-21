@@ -7,6 +7,13 @@ from .utils import parse_dom
 __all__ = ("TestQuery", )
 
 
+def beginning_text(elem):
+    try:
+        return elem.childNodes[0].data.strip()
+    except (IndexError, AttributeError):
+        return None
+
+
 class TestQuery(unittest.TestCase):
     def setUp(self):
         self.doc_path = path.join(path.dirname(__file__), "html")
@@ -14,6 +21,7 @@ class TestQuery(unittest.TestCase):
 
         self.loadTree("doc1")
         self.loadTree("doc2")
+        self.loadTree("doc3")
 
     def loadTree(self, name):
         filename = f"{name}.html"
@@ -34,7 +42,7 @@ class TestQuery(unittest.TestCase):
 
         for i, par in enumerate(pars, 1):
             with self.subTest(p=i):
-                text = par.childNodes[0].data.strip()
+                text = beginning_text(par)
                 expect = f"paragraph{i}"
                 self.assertEqual(text, expect)
 
@@ -58,28 +66,8 @@ class TestQuery(unittest.TestCase):
                 self.assertEqual(par.tagName, "p")
                 self.assertIn(par, foot.childNodes)
 
-    def testSiblings(self):
-        doc = self.trees["doc2"]
-        pars = query(doc, "p + p")
-        count = 6
-
-        self.assertEqual(len(pars), count)
-
-        par_nums = (1, 2, 4, 5, 6, 7, )
-        for i, par in zip(par_nums, pars):
-            with self.subTest(p=i):
-                text = par.childNodes[0].data.strip()
-                expect = f"paragraph{i}"
-                self.assertEqual(text, expect)
-
     def testAttributes(self):
         doc = self.trees["doc2"]
-
-        def beginning_text(elem):
-            try:
-                return elem.childNodes[0].data.strip()
-            except (IndexError, AttributeError):
-                return None
 
         expected = [
             ["paragraph0", "p#p0[data-attr]",        "presence"],
@@ -97,3 +85,53 @@ class TestQuery(unittest.TestCase):
                 pars = query(doc, selector)
                 self.assertEqual(len(pars), 1)
                 self.assertEqual(beginning_text(pars[0]), text)
+
+        #  This is for coverage of a 'begins match' with
+        #  missing attribute
+        with self.subTest(type="missing begins"):
+            pars = query(doc, "#p0[data-missing|=value]")
+            self.assertEqual(len(pars), 0)
+
+    def testClasses(self):
+        doc = self.trees["doc1"]
+
+        with self.subTest():
+            pars = query(doc, "*.cls1")
+            self.assertEqual(len(pars), 2)
+            self.assertEqual(beginning_text(pars[0]), "paragraph2")
+            self.assertEqual(beginning_text(pars[1]), "paragraph4")
+
+        with self.subTest():
+            pars = query(doc, "*.cls1.cls2")
+            self.assertEqual(len(pars), 1)
+            self.assertEqual(beginning_text(pars[0]), "paragraph4")
+
+        with self.subTest():
+            pars = query(doc, "*.cls2.cls3")
+            self.assertEqual(len(pars), 0)
+
+    def testSiblingsNext(self):
+        doc = self.trees["doc3"]
+        pars = query(doc, "p + p")
+        par_nums = (1, 2, 4, 5, 6, 7, )
+
+        self.assertEqual(len(pars), len(par_nums))
+
+        for i, par in zip(par_nums, pars):
+            with self.subTest(p=i):
+                text = beginning_text(par)
+                expect = f"paragraph{i}"
+                self.assertEqual(text, expect)
+
+    def testSiblingsSubsequent(self):
+        doc = self.trees["doc3"]
+        pars = query(doc, "h1 ~ p")
+        par_nums = (3, 4, 5, 6, 7, )
+
+        self.assertEqual(len(pars), len(par_nums))
+
+        for i, par in zip(par_nums, pars):
+            with self.subTest(p=i):
+                text = beginning_text(par)
+                expect = f"paragraph{i}"
+                self.assertEqual(text, expect)
