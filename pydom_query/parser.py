@@ -4,6 +4,35 @@ __all__ = ["parse", ]
 
 
 def parse(tokens):
+    """
+    Parse a sequence of tokens and return its AST.
+
+    The implementation is a descent parser which return the AST on success or
+    raises `SyntaxError` on failure.
+
+    The AST is just a tree of tuples with this form:
+
+        - first level: selectors groups (selectors separated by commas),
+        - second level: tuples of combinators and simple selectors,
+        - third level: combinator and criteria (actual simple selectors),
+
+    As an example the selector "p#summary[main] > a.hl, div div" becomes:
+
+        (
+          (
+            (S,         ((TYPE, 'p'), (HASH, 'summary'), (HASATTRIB, 'main'))),
+            (GREATER,   ((TYPE, 'a'), (CLASS, 'hl')))
+          ),
+          (
+            (S, ((TYPE, 'div'),)),
+            (S, ((TYPE, 'div'),))
+          )
+        )
+
+    Every selector group starts with an implicit descendants combinator
+    (symbol `S`) at this stage.
+    """
+
     sym = value = None
 
     # Token control functions

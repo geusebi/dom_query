@@ -5,11 +5,13 @@ Lexical scanner loosely based on the one described in
 There are major differences as the regexes have been simplified and
 only a subset of tokens are recognized.
 
-The `S` represents much less than the original one. Attributes
-operators and combinators consumes all the spaces around the tokens.
+The `S` symbol represents much less than the original one.
+Attributes operators and combinators consumes all the spaces around
+the tokens.
 This allows to write simpler parser rules and a smaller lexer but
 code behavior isn't always trivial.
 """
+
 from .symbols import SYM
 import re
 
@@ -61,18 +63,18 @@ literal = {
 
 def lexer(source):
     """
+    Split a string `source` in a sequence of tokens.
+
+    A token is a 2-tuple of `(symbol type, value)`.
     The first usable token is always `START` and the last one is `END`,
     after that a `(None, None)` token is emitted as sentinel.
+
     `S` token is emitted only inside attributes selectors (to be ignored)
     and between simple selectors (where means descendant combinator).
 
     Classes and ID selectors are stripped of the first character.
-    Quoted strings support escaping and are stripped of delimiters.
-    Every unrecognized token is emitted as a sequance of `LETTER` tokens.
-
-
-    :param source: text to tokenize
-    :return: a token generator
+    Quoted strings support simple escaping and are stripped of delimiters.
+    Every unrecognized token is emitted as a sequence of `LETTER` tokens.
     """
     matches = SPLIT_RE.finditer(source)
 
