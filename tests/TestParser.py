@@ -10,5 +10,5 @@ def to_ast(s):
 
 class TestParser(TestLinePairs):
     def testSelector(self):
-        name = "parser.selector1.test.gen"
+        name = "selector.parser.test-gen"
         self.check_file(name, to_ast)

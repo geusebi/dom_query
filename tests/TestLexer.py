@@ -10,9 +10,9 @@ def to_tokens(s):
 
 class TestLexer(TestLinePairs):
     def testSingleSelectors(self):
-        name = "lexer.simple_selector.test.gen"
+        name = "selector.lexer.test-gen"
         self.check_file(name, to_tokens)
 
     def testAllTokens(self):
-        name = "lexer.all_tokens.test.gen"
+        name = "all_tokens.lexer.test-gen"
         self.check_file(name, to_tokens)
