@@ -9,5 +9,7 @@ __all__ = ["lexer", "parse", "compile", "execute",
 
 
 def query(node, query):
+    #  todo: create other query functions for single and generators
+    #    and move code outside of `__init__`
     code = compile(query)
     return execute(node, code, minidom_api)

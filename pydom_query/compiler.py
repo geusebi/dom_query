@@ -12,7 +12,7 @@ sym_code_map = {
     SYM.PREFIXMATCH:    OP.ATTR_PREFIX,
     SYM.SUFFIXMATCH:    OP.ATTR_SUFFIX,
     SYM.SUBSTRINGMATCH: OP.ATTR_SUBSTRING,
-    SYM.CLASS:          OP.CLASSES,
+    SYM.CLASS:          OP.CLASSES, # todo: remove?
     SYM.S:              OP.DESCENDANT,
     SYM.GREATER:        OP.CHILDREN,
     SYM.PLUS:           OP.SIBLING_NEXT,

@@ -54,7 +54,7 @@ def parse(tokens):
             f"Expected token type ({kind}={kind:d})"
         )
 
-    # Generation rules
+    # Production rules
     def selector_group():
         group = list()
 
