@@ -18,6 +18,9 @@ def implement(opcode):
 
 @implement(OP.TAGNAME)
 def tag_equal(name):
+    """Create a filter to check whether an element has the
+    tag type equal to `name`
+    """
     def f(elem):
         return elem.tagName == name
     return f
@@ -25,6 +28,9 @@ def tag_equal(name):
 
 @implement(OP.ID)
 def id_equal(name):
+    """Create a filter to check whether an element has the
+    id equal to `name`
+    """
     def f(elem):
         return (elem.hasAttribute("id") and
                 elem.getAttribute("id") == name)

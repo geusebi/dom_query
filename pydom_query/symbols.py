@@ -29,7 +29,7 @@ class NameSpace(object):
             self.__dict__[name] = value
 
 
-#  Symbols for the lexer and the parser
+# Symbols for the lexer and the parser
 SYM = NameSpace()
 
 (SYM.ATTRIBOPEN,     SYM.COMMA,
@@ -46,7 +46,7 @@ SYM = NameSpace()
  SYM.TILDE,
  ) = range(23)
 
-#  Combinators symbols at parser stage
+# Combinators symbols at parser stage
 SYM.combinators = (
     SYM.PLUS,
     SYM.GREATER,
@@ -54,7 +54,7 @@ SYM.combinators = (
     SYM.S,
 )
 
-#  Attributes match symbols at parser stage
+# Attributes match symbols at parser stage
 SYM.attribmatch = (
     SYM.EQUAL,
     SYM.INCLUDES,
@@ -65,7 +65,7 @@ SYM.attribmatch = (
 )
 
 
-#  Op codes for the compilation and execution level
+# Op codes for the compilation and execution level
 OP = NameSpace()
 
 (OP.TAGNAME,            OP.ATTR_PRESENCE,
@@ -78,7 +78,7 @@ OP = NameSpace()
  OP.RESET,              OP.CLASSES,
  ) = range(16)
 
-#  Combinators symbols at compilation stage
+# Combinators symbols at compilation stage
 OP.combinators = {
     OP.DESCENDANT,
     OP.CHILDREN,
@@ -86,7 +86,7 @@ OP.combinators = {
     OP.SIBLING_SUBSEQUENT,
 }
 
-#  Attributes match symbols at compilation stage
+# Attributes match symbols at compilation stage
 OP.filters = {
     OP.TAGNAME,
     OP.ID,

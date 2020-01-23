@@ -13,18 +13,24 @@ sym_code_map = {
     SYM.PREFIXMATCH:    OP.ATTR_PREFIX,
     SYM.SUFFIXMATCH:    OP.ATTR_SUFFIX,
     SYM.SUBSTRINGMATCH: OP.ATTR_SUBSTRING,
-    SYM.CLASS:          OP.CLASSES, # todo: remove?
+    SYM.CLASS:          OP.CLASSES,  # todo: remove?
     SYM.S:              OP.DESCENDANT,
     SYM.GREATER:        OP.CHILDREN,
     SYM.PLUS:           OP.SIBLING_NEXT,
     SYM.TILDE:          OP.SIBLING_SUBSEQUENT,
 }
 
-#  Module level cache for compiled queries
+# Module level cache for compiled queries
 _cache = {}
 
 
 def compile(source):
+    """
+    Compile `source` into a sequence of opcodes (see `_compile_gen`)
+    and cache the result for subsequent calls.
+
+    Return the sequence of opcodes and relative arguments.
+    """
     if source not in _cache:
         tokens = lexer(source)
         ast = parse(tokens)
@@ -35,6 +41,12 @@ def compile(source):
 
 
 def _compile_gen(ast):
+    """
+    Convert the AST in a sequence of calls to opcodes.
+
+    Every opcode represents a relatively simple action and is
+    accompanied by its arguments (if needed) as an iterable.
+    """
     for selector in ast:
         yield (OP.RESET, )
 
