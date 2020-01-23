@@ -33,20 +33,24 @@ def parse(tokens):
     (symbol `S`) at this stage.
     """
 
+    #  Symbol and value of the current token
     sym = value = None
 
     # Token control functions
     def advance():
+        """Next token"""
         nonlocal sym, value
         sym, value = next(tokens)
 
     def accept(kind):
+        """Next token if it match `kind`"""
         if sym == kind:
             advance()
             return True
         return False
 
     def expect(kind):
+        """Next token and raise SyntaxError if it doesn't match `kind`"""
         if sym == kind:
             advance()
             return True
@@ -56,6 +60,7 @@ def parse(tokens):
 
     # Production rules
     def selector_group():
+        """selector(, selector)+"""
         group = list()
 
         group.append(selector())
@@ -65,6 +70,7 @@ def parse(tokens):
         return tuple(group)
 
     def selector():
+        """(combinator simple_selector)+"""
         sequence = list()
         sequence.append((SYM.S, simple_selector()))
         while sym in SYM.combinators:
@@ -75,6 +81,7 @@ def parse(tokens):
         return tuple(sequence)
 
     def simple_selector():
+        """(criteria+)"""
         if sym not in (SYM.UNIVERSAL, SYM.IDENT,
                        SYM.HASH, SYM.CLASS, SYM.ATTRIBOPEN):
             raise SyntaxError("Expected a simple selector")
@@ -97,6 +104,7 @@ def parse(tokens):
         return tuple(criteria)
 
     def attrib():
+        """attribute_name (operator value)?"""
         op = string = None
 
         expect(SYM.ATTRIBOPEN)

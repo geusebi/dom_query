@@ -2,6 +2,7 @@ from .lexer import lexer
 from .parser import parse
 from .symbols import SYM, OP
 
+#  Map to convert parser symbols to op codes
 sym_code_map = {
     SYM.TYPE:           OP.TAGNAME,
     SYM.HASH:           OP.ID,
@@ -19,6 +20,7 @@ sym_code_map = {
     SYM.TILDE:          OP.SIBLING_SUBSEQUENT,
 }
 
+#  Module level cache for compiled queries
 _cache = {}
 
 
