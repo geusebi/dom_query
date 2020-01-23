@@ -1,7 +1,7 @@
 import unittest
 from os import path
 from xml.dom.minidom import Document
-from pydom_query import query
+from pydom_query import select_all
 from .utils import parse_dom
 
 __all__ = ("TestQuery", )
@@ -34,7 +34,7 @@ class TestQuery(unittest.TestCase):
         self.assertIsInstance(self.trees["doc1"], Document)
 
     def testElementsOrder(self):
-        pars = query(self.trees["doc1"], "p")
+        pars = select_all(self.trees["doc1"], "p")
 
         count = 7
         with self.subTest(count=count):
@@ -47,7 +47,7 @@ class TestQuery(unittest.TestCase):
                 self.assertEqual(text, expect)
 
     def testTagType(self):
-        pars = query(self.trees["doc1"], "p")
+        pars = select_all(self.trees["doc1"], "p")
 
         for i, par in enumerate(pars, 1):
             with self.subTest(p=i):
@@ -55,8 +55,8 @@ class TestQuery(unittest.TestCase):
 
     def testChildren(self):
         doc = self.trees["doc1"]
-        foot = query(doc, "footer#foot1")[0]
-        pars = query(doc, "footer#foot1 > p")
+        foot = select_all(doc, "footer#foot1")[0]
+        pars = select_all(doc, "footer#foot1 > p")
         count = 2
 
         self.assertEqual(len(pars), count)
@@ -82,37 +82,37 @@ class TestQuery(unittest.TestCase):
 
         for text, selector, message in expected:
             with self.subTest(type=message):
-                pars = query(doc, selector)
+                pars = select_all(doc, selector)
                 self.assertEqual(len(pars), 1)
                 self.assertEqual(beginning_text(pars[0]), text)
 
         #  This is for coverage of a 'begins match' with
         #  missing attribute
         with self.subTest(type="missing begins"):
-            pars = query(doc, "#p0[data-missing|=value]")
+            pars = select_all(doc, "#p0[data-missing|=value]")
             self.assertEqual(len(pars), 0)
 
     def testClasses(self):
         doc = self.trees["doc1"]
 
         with self.subTest():
-            pars = query(doc, "*.cls1")
+            pars = select_all(doc, "*.cls1")
             self.assertEqual(len(pars), 2)
             self.assertEqual(beginning_text(pars[0]), "paragraph2")
             self.assertEqual(beginning_text(pars[1]), "paragraph4")
 
         with self.subTest():
-            pars = query(doc, "*.cls1.cls2")
+            pars = select_all(doc, "*.cls1.cls2")
             self.assertEqual(len(pars), 1)
             self.assertEqual(beginning_text(pars[0]), "paragraph4")
 
         with self.subTest():
-            pars = query(doc, "*.cls2.cls3")
+            pars = select_all(doc, "*.cls2.cls3")
             self.assertEqual(len(pars), 0)
 
     def testSiblingsNext(self):
         doc = self.trees["doc3"]
-        pars = query(doc, "p + p")
+        pars = select_all(doc, "p + p")
         par_nums = (1, 2, 4, 5, 6, 7, )
 
         self.assertEqual(len(pars), len(par_nums))
@@ -125,7 +125,7 @@ class TestQuery(unittest.TestCase):
 
     def testSiblingsSubsequent(self):
         doc = self.trees["doc3"]
-        pars = query(doc, "h1 ~ p")
+        pars = select_all(doc, "h1 ~ p")
         par_nums = (3, 4, 5, 6, 7, )
 
         self.assertEqual(len(pars), len(par_nums))
