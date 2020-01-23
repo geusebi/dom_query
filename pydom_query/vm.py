@@ -4,10 +4,6 @@ __all__ = ["execute", ]
 
 
 def execute(root, code, api):
-    return tuple(_execute_gen(root, code, api))
-
-
-def _execute_gen(root, code, api):
     output = {}
 
     elements = None
