@@ -4,7 +4,7 @@ __all__ = ["execute", ]
 
 
 def execute(root, code, api):
-    output = {}
+    yielded = set()
 
     elements = None
     for opcode, *args in code:
@@ -16,7 +16,8 @@ def execute(root, code, api):
 
         elif opcode == OP.YIELD:
             for element in elements:
-                if element not in output:
+                if element not in yielded:
+                    yielded.add(element)
                     yield element
 
         elif opcode == OP.RESET:
