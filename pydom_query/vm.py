@@ -14,7 +14,7 @@ def execute(root, code, api):
         elif opcode in OP.combinators:
             elements = api[opcode](elements)
 
-        elif opcode == OP.STORE:
+        elif opcode == OP.YIELD:
             for element in elements:
                 if element not in output:
                     yield element

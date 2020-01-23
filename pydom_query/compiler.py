@@ -66,4 +66,4 @@ def _compile_gen(ast):
             if classes:
                 yield (OP.CLASSES, (classes, ))
 
-        yield (OP.STORE, )
+        yield (OP.YIELD, )

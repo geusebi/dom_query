@@ -74,7 +74,7 @@ OP = NameSpace()
  OP.CHILDREN,           OP.ATTR_BEGIN,
  OP.SIBLING_NEXT,       OP.ATTR_PREFIX,
  OP.SIBLING_SUBSEQUENT, OP.ATTR_SUFFIX,
- OP.STORE,              OP.ATTR_SUBSTRING,
+ OP.YIELD,              OP.ATTR_SUBSTRING,
  OP.RESET,              OP.CLASSES,
  ) = range(16)
 
