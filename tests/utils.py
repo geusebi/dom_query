@@ -1,4 +1,3 @@
-from pydom_query import lexer, parse
 import warnings
 import html5lib
 from xml.dom.minidom import Childless as _Childless
