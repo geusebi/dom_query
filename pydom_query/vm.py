@@ -4,7 +4,11 @@ __all__ = ["execute", ]
 
 
 def execute(root, code, api):
-    output = []
+    return tuple(_execute_gen(root, code, api))
+
+
+def _execute_gen(root, code, api):
+    output = {}
 
     elements = None
     for opcode, *args in code:
@@ -17,12 +21,10 @@ def execute(root, code, api):
         elif opcode == OP.STORE:
             for element in elements:
                 if element not in output:
-                    output.append(element)
+                    yield element
 
         elif opcode == OP.RESET:
             elements = [root]
 
         else:
             raise NotImplemented
-
-    return output
