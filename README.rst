@@ -7,8 +7,8 @@ Short example
 -------------
 
 Provided an HTML file `sample.html` the following code will query
-some elements and return them as `minidom` `Element`s.
-In case of multiple elements (`select_all`) a simple python `list`
+some elements and return them as `minidom` `Element` s.
+In case of multiple elements ( `select_all` ) a simple python `list`
 is returned (instead of a minidom `NodeList`).
 
 .. code-block:: python
