@@ -6,10 +6,10 @@ CSS selector syntax for python minidom and DOM implementations.
 Short example
 -------------
 
-Provided an HTML file `sample.html` the following code will query
-some elements and return them as `minidom` `Element` s.
-In case of multiple elements ( `select_all` ) a simple python `list`
-is returned (instead of a minidom `NodeList`).
+Provided an HTML file *sample.html* the following code will query
+some elements and return them as *minidom* *Elements*.
+In case of multiple elements (*select_all*) a simple python *list*
+is returned (instead of a minidom *NodeList*).
 
 .. code-block:: python
 
@@ -60,7 +60,7 @@ Every query is compiled and cached sor subsequent use.
 Lexer
 ^^^^^
 
-The first stage is tokenization (`lexer.py lexer`) which is loosely
+The first stage is tokenization (*lexer.py lexer*) which is loosely
 based on the
 `W3C selector lexer <https://www.w3.org/TR/selectors-3/#lex>`_.
 The differences are mainly to make the tokenizer compatible with
@@ -69,7 +69,7 @@ regular expressions and to strip every unnecessary feautures.
 Parser
 ^^^^^^
 
-Then follows the parsing stage (`parser.py parse`) which produce a
+Then follows the parsing stage (*parser.py parse*) which produce a
 simple AST from the tokens. The parser is, just like the tokenizer, a
 simplified version of the standard one. It is a single function which
 implements a descent parser. The AST is a tuple of tuples and maps in
@@ -78,7 +78,7 @@ a relatively close way the given query.
 Compiler
 ^^^^^^^^
 
-The last stage is the compiler (`compiler.py compile`). It translates
+The last stage is the compiler (*compiler.py compile*). It translates
 the AST into a sequence of simple actions to be performed in order to
 select the matching elements.
 Once compiled it is saved in cache and will be reused whenever the same
@@ -87,27 +87,27 @@ query is seen again.
 Virtual machine
 ^^^^^^^^^^^^^^^
 
-The opcodes are executed by (`vm.py execute`). This function takes a
-starting element, a sequence of opcodes, and an `api`.
+The opcodes are executed by (*vm.py execute*). This function takes a
+starting element, a sequence of opcodes, and an *api*.
 The api is dict-like object. Every key corresponds to a function which
-implements an opcode. The default api is `minidom_api.py api`.
+implements an opcode. The default api is *minidom_api.py api*.
 
 DOM API
 ^^^^^^^
 
 Every function in the api is either a filter (actual filtering of nodes)
 or a generator (combinators expansion). The only two opcodes which don't
-follows this rule are `YIELD` (return elements found so far) and `RESET`
+follows this rule are *YIELD* (return elements found so far) and *RESET*
 (reload the orignal elment node after a CSS comma).
 
-In case of other `dom` implementations it *should* be sufficient to
-write a new api and pass it to `execute` (or `select*`) upon querying.
+In case of other *dom* implementations it *should* be sufficient to
+write a new api and pass it to *execute* (or *select\**) upon querying.
 
 Code quality and stability
 --------------------------
 
 The code is far from complete.
-It is tested but there are minor issues (attribute match don't follows
+It is tested but there are minor issues (attribute match doesn't follow
 the specs verbatim).
 
 Feel free to contribute.
