@@ -1,7 +1,7 @@
 import unittest
 from os import path
 from xml.dom.minidom import Document
-from pydom_query import select_all
+from pydom_query import select, select_all
 from .utils import parse_dom
 
 __all__ = ("TestQuery", )
@@ -55,7 +55,7 @@ class TestQuery(unittest.TestCase):
 
     def testChildren(self):
         doc = self.trees["doc1"]
-        foot = select_all(doc, "footer#foot1")[0]
+        foot = select(doc, "footer#foot1")
         pars = select_all(doc, "footer#foot1 > p")
         count = 2
 
@@ -89,8 +89,8 @@ class TestQuery(unittest.TestCase):
         #  This is for coverage of a 'begins match' with
         #  missing attribute
         with self.subTest(type="missing begins"):
-            pars = select_all(doc, "#p0[data-missing|=value]")
-            self.assertEqual(len(pars), 0)
+            pars = select(doc, "#p0[data-missing|=value]")
+            self.assertEqual(pars, None)
 
     def testClasses(self):
         doc = self.trees["doc1"]
