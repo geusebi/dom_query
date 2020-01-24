@@ -1,15 +1,15 @@
 import setuptools
 
-long_desc = open("README.md").read()
+long_desc = open("README.rst").read()
 
 setuptools.setup(
     name='pydom_query',
-    version='0.0.1',
+    version='0.0.2',
     packages=('pydom_query', ),
 
-    description="",
+    description="CSS selector syntax for python minidom "
+                "and compatible DOM implementations",
     long_description=long_desc,
-    long_description_content_type='text/markdown',
 
     # url git
     url='https://gitlab.com/geusebi/pydom_query',
@@ -29,5 +29,8 @@ setuptools.setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Text Processing :: Markup',
+        'Topic :: Text Processing :: Markup :: HTML',
     ],
 )
