@@ -35,11 +35,11 @@ Supported CSS syntax
 
 Only a subset of CSS syntax is supported:
 
-    - Compound selectors (comma separator),
-    - element type and id,
-    - classes presence,
-    - attributes match (presence and all the other operators),
-    - combinators (descendant, sibling, subsequent, child).
+- Compound selectors (comma separator),
+- element type and id,
+- classes presence,
+- attributes match (presence and all the other operators),
+- combinators (descendant, sibling, subsequent, child).
 
 Some supported selectors:
 
@@ -57,11 +57,17 @@ Internals and implementation
 
 Every query is compiled and cached sor subsequent use.
 
+Lexer
+^^^^^
+
 The first stage is tokenization (`lexer.py lexer`) which is loosely
 based on the
 `W3C selector lexer <https://www.w3.org/TR/selectors-3/#lex>`_.
 The differences are mainly to make the tokenizer compatible with
 regular expressions and to strip every unnecessary feautures.
+
+Parser
+^^^^^^
 
 Then follows the parsing stage (`parser.py parse`) which produce a
 simple AST from the tokens. The parser is, just like the tokenizer, a
@@ -69,16 +75,25 @@ simplified version of the standard one. It is a single function which
 implements a descent parser. The AST is a tuple of tuples and maps in
 a relatively close way the given query.
 
+Compiler
+^^^^^^^^
+
 The last stage is the compiler (`compiler.py compile`). It translates
 the AST into a sequence of simple actions to be performed in order to
 select the matching elements.
 Once compiled it is saved in cache and will be reused whenever the same
 query is seen again.
 
+Virtual machine
+^^^^^^^^^^^^^^^
+
 The opcodes are executed by (`vm.py execute`). This function takes a
 starting element, a sequence of opcodes, and an `api`.
 The api is dict-like object. Every key corresponds to a function which
 implements an opcode. The default api is `minidom_api.py api`.
+
+DOM API
+^^^^^^^
 
 Every function in the api is either a filter (actual filtering of nodes)
 or a generator (combinators expansion). The only two opcodes which don't
