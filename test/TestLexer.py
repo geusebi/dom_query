@@ -1,4 +1,4 @@
-from pydom_query import lexer
+from dom_query import lexer
 from .TestLinePairs import TestLinePairs
 
 __all__ = ("TestLexer", )

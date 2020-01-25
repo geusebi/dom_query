@@ -1,5 +1,5 @@
 from sys import argv, exit
-from pydom_query import lexer, parse
+from dom_query import lexer, parse
 from pathlib import Path
 import logging
 

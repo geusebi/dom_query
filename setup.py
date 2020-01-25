@@ -3,16 +3,16 @@ import setuptools
 long_desc = open("README.rst").read()
 
 setuptools.setup(
-    name='pydom_query',
+    name='dom_query',
     version='0.0.2',
-    packages=('pydom_query', ),
+    packages=('dom_query', ),
 
     description="CSS selector syntax for python minidom "
                 "and compatible DOM implementations",
     long_description=long_desc,
 
     # url git
-    url='https://gitlab.com/geusebi/pydom_query',
+    url='https://gitlab.com/geusebi/dom_query',
 
     python_requires='>=3.7',
     install_requires=tuple(),

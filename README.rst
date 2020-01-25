@@ -1,4 +1,4 @@
-Pydom query
+DOM query
 ===========
 
 CSS selector syntax for python minidom and DOM implementations.
@@ -14,7 +14,7 @@ is returned (instead of a minidom *NodeList*).
 .. code-block:: python
 
     from xml.dom.minidom import parse
-    from pydom_query import select, select_all
+    from dom_query import select, select_all
 
     tree = parse("test/html/sample.html")
 
@@ -98,7 +98,7 @@ DOM API
 Every function in the api is either a filter (actual filtering of nodes)
 or a generator (combinators expansion). The only two opcodes which don't
 follows this rule are *YIELD* (return elements found so far) and *RESET*
-(reload the orignal elment node after a CSS comma).
+(reload the original element node after a CSS comma).
 
 In case of other *dom* implementations it *should* be sufficient to
 write a new api and pass it to *execute* (or *select\**) upon querying.

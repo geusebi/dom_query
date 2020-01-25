@@ -1,7 +1,7 @@
 import unittest
 from os import path
 from xml.dom.minidom import Document
-from pydom_query import select, select_all
+from dom_query import select, select_all
 from .utils import parse_dom
 
 __all__ = ("TestQuery", )
