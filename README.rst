@@ -55,7 +55,7 @@ Some supported selectors:
 Internals and implementation
 ----------------------------
 
-Every query is compiled and cached sor subsequent use.
+Every query is compiled and cached for subsequent use.
 
 Lexer
 ^^^^^
@@ -64,7 +64,7 @@ The first stage is tokenization (*lexer.py lexer*) which is loosely
 based on the
 `W3C selector lexer <https://www.w3.org/TR/selectors-3/#lex>`_.
 The differences are mainly to make the tokenizer compatible with
-regular expressions and to strip every unnecessary feautures.
+regular expressions and to strip every unnecessary features.
 
 Parser
 ^^^^^^
