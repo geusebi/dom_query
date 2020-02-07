@@ -4,7 +4,7 @@ long_desc = open("README.rst").read()
 
 setuptools.setup(
     name='dom_query',
-    version='0.0.2',
+    version='0.0.3',
     packages=('dom_query', ),
 
     description="CSS selector syntax for python minidom "
