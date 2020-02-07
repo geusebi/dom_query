@@ -14,7 +14,7 @@ setuptools.setup(
     # url git
     url='https://gitlab.com/geusebi/dom_query',
 
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     install_requires=tuple(),
 
     author='Giampaolo Eusebi',
@@ -29,6 +29,7 @@ setuptools.setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Text Processing :: Markup',
         'Topic :: Text Processing :: Markup :: HTML',
