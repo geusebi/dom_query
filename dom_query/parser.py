@@ -91,7 +91,7 @@ def parse(tokens):
             criteria.append((SYM.UNIVERSAL, ))
             advance()
         elif sym == SYM.IDENT:
-            criteria.append((SYM.TYPE, value, ))
+            criteria.append((SYM.TYPE, value.lower(), ))
             advance()
 
         while sym in (SYM.HASH, SYM.CLASS, SYM.ATTRIBOPEN):
@@ -110,7 +110,7 @@ def parse(tokens):
         expect(SYM.ATTRIBOPEN)
 
         accept(SYM.S)
-        name = value
+        name = value.lower()
         expect(SYM.IDENT)
         accept(SYM.S)
 
