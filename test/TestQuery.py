@@ -53,6 +53,15 @@ class TestQuery(unittest.TestCase):
             with self.subTest(p=i):
                 self.assertEqual(par.tagName, "p")
 
+    def testTagCapitalization(self):
+        with self.subTest(msg="tag name"):
+            pars = select_all(self.trees["doc1"], "P")
+            self.assertAlmostEqual(len(pars), 7)
+
+        with self.subTest(msg="attr name"):
+            pars = select_all(self.trees["doc1"], "p[DATA-user]")
+            self.assertAlmostEqual(len(pars), 1)
+
     def testChildren(self):
         doc = self.trees["doc1"]
         foot = select(doc, "footer#foot1")
